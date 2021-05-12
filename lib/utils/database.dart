@@ -4,13 +4,15 @@ import 'package:flutter/widgets.dart';
 
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
+import 'package:sqflite/sqlite_api.dart';
+import 'package:business_card_project/models/card.dart';
 
 
 class DBProvider {
   DBProvider._();
   static final DBProvider db = DBProvider._();
-
   static Database _database;
+
   Future<Database> get database async {
     if (_database != null)
       return _database;
@@ -19,6 +21,53 @@ class DBProvider {
     _database = await initDB();
     return _database;
   }
+
+
+  init() async {
+    return await openDatabase(
+        join(await getDatabasesPath(), 'business_card_database.db'),
+        onCreate: (db, version) async {
+          await db.execute('''
+          CREATE TABLE cards(
+            id INTEGER PRIMARY KEY, 
+            avatar TEXT, 
+            name TEXT, 
+            lastName TEXT, 
+            company TEXT, 
+            phone TEXT, 
+            email TEXT, 
+            description TEXT
+          )
+        ''');
+        },
+        version: 1
+    );
+  }
+
+  // newCard(newCard) async {
+  //   final db = await database;
+  //
+  //   var res = await db.rawInsert('''
+  //     INSERT INTO cards (
+  //       id, avatar, name, lastName, company, phone, email, description
+  //     ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+  //   ''', [newCard.id, newCard.avatar, newCard.name, newCard.lastName, newCard.company, newCard.phone, newCard.email, newCard.description]
+  //   );
+  //
+  //   return res;
+  // }
+  //
+  //
+  // Future<dynamic> getUser() async {
+  //   final db = await database;
+  //   var res = await db.query("card");
+  //   if(res.length == 0) {
+  //     return null;
+  //   } else {
+  //     var resMap = res[0];
+  //     return resMap.isNotEmpty ? resMap : Null;
+  //   }
+  // }
 
 
   initDB() async {
@@ -46,30 +95,30 @@ class DBProvider {
       version: 1,
     );
 
-    var fCard = Card(1, '', 'image/dress_for_day.jpg', 'Natalya', 'Skyba',
-        'HandMade', 'nataly.skyba@gmail.com', 'My company is perfect. '
-            'We are the first rental service for evening and cocktail '
-            'dresses in Kyiv. Our main advantage is the best prices for '
-            'the rental of branded dresses in Kyiv !!! ');
-
-    // Insert a dog into the database.
-    await insertCard(fCard);
-
-    // Print the list of dogs (only Fido for now).
-    print(await cards());
-
-    // Update Fido's age and save it to the database.
-    fCard = Card(fCard.id, fCard.imageUrl, fCard.name, fCard.lastName, 'Weekly', fCard.phone, fCard.email, fCard.description);
-    await updateCard(fCard);
-
-    // Print Fido's updated information.
-    print(await cards());
-
-    // Delete Fido from the database.
-    await deleteCard(fCard.id);
-
-    // Print the list of dogs (empty).
-    print(await cards());
+    // var fCard = Card(1, '', 'image/dress_for_day.jpg', 'Natalya', 'Skyba',
+    //     'HandMade', 'nataly.skyba@gmail.com', 'My company is perfect. '
+    //         'We are the first rental service for evening and cocktail '
+    //         'dresses in Kyiv. Our main advantage is the best prices for '
+    //         'the rental of branded dresses in Kyiv !!! ');
+    //
+    // // Insert a dog into the database.
+    // await insertCard(fCard);
+    //
+    // // Print the list of dogs (only Fido for now).
+    // print(await cards());
+    //
+    // // Update Fido's age and save it to the database.
+    // fCard = Card(fCard.id, fCard.imageUrl, fCard.name, fCard.lastName, 'Weekly', fCard.phone, fCard.email, fCard.description);
+    // await updateCard(fCard);
+    //
+    // // Print Fido's updated information.
+    // print(await cards());
+    //
+    // // Delete Fido from the database.
+    // await deleteCard(fCard.id);
+    //
+    // // Print the list of dogs (empty).
+    // print(await cards());
   }
 
   Future<void> insertCard(Card card) async {
@@ -135,41 +184,5 @@ class DBProvider {
   }
 
 
-
-}
-
-
-class Card{
-  final int id;
-  final String imageUrl;
-  final String name;
-  final String lastName;
-  final String company;
-  final String phone;
-  final String email;
-  final String description;
-
-  Card(this.id, this.imageUrl, this.name, this.lastName, this.company, this.phone, this.email, this.description);
-
-  Map<String, dynamic> toMap() {
-    return {
-      'id': id,
-      'avatar': imageUrl,
-      'name': name,
-      'lastName': lastName,
-      'company': company,
-      'phone': phone,
-      'email': email,
-      'description': description,
-    };
-  }
-
-  // Implement toString to make it easier to see information about
-  // each dog when using the print statement.
-  @override
-  String toString() {
-    return 'Card{id: $id, avatar: $imageUrl, name: $name, lastName: $lastName,'
-        ' company: $company, phone: $phone, email: $email, description: $description}';
-  }
 
 }
