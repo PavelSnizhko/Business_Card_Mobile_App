@@ -4,7 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 
-void main() => runApp(MaterialApp(home: QRViewExample()));
+// void main() => runApp(MaterialApp(home: QRViewExample()));
 
 class QRViewExample extends StatefulWidget {
   const QRViewExample({

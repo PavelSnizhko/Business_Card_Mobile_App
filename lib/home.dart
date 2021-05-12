@@ -60,6 +60,9 @@ class _MyHomePageState extends State<MyHomePage> {
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
+        actions: [
+          IconButton(icon: Icon(Icons.linked_camera), onPressed: _scanQR),
+        ],
       ),
       body: Container(
         //future: DBProvider.db.cards(),
@@ -203,6 +206,20 @@ class _MyHomePageState extends State<MyHomePage> {
 
       ),
       drawer: ProfileDrawer(),// This trailing comma makes auto-formatting nicer for build methods.
+    );
+  }
+
+  void _scanQR() {
+    Navigator.of(context).push(
+      MaterialPageRoute<void>(
+        builder: (BuildContext context) {
+              return ListTile(
+                onTap: () {
+                  Navigator.pushNamed(context, '/scanner');
+                },
+              );
+        },
+      ),
     );
   }
 }
