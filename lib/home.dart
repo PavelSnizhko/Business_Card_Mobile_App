@@ -6,8 +6,6 @@ import 'package:flutter/widgets.dart';
 import 'package:flip_card/flip_card.dart';
 import 'package:business_card_project/models/card.dart';
 
-
-
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
 
@@ -48,7 +46,6 @@ class _MyHomePageState extends State<MyHomePage> {
   //             'dresses in Kyiv. Our main advantage is the best prices for '
   //             'the rental of branded dresses in Kyiv !!! ');
 
-
   //DBProvider.db.ca
 
   @override
@@ -71,21 +68,25 @@ class _MyHomePageState extends State<MyHomePage> {
             FlipCard(
               direction: FlipDirection.HORIZONTAL,
               front: Container(
-                margin: EdgeInsets.only(left: 10.0, top: 45.0, right: 10.0, bottom: 20.0),
+                margin: EdgeInsets.only(
+                    left: 10.0, top: 45.0, right: 10.0, bottom: 20.0),
                 height: 205,
                 width: 400,
                 decoration: BoxDecoration(
                     color: Colors.white.withOpacity(0.9),
                     borderRadius: BorderRadius.circular(16),
-                    boxShadow: [BoxShadow(
-                      color: Colors.pink.withOpacity(0.6),
-                      blurRadius: 6,
-                      offset: Offset(1, 1),
-                    )]
-                ),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.pink.withOpacity(0.6),
+                        blurRadius: 6,
+                        offset: Offset(1, 1),
+                      )
+                    ]),
                 child: Container(
-                  margin: EdgeInsets.only(left: 5.0, top: 10.0, right: 5.0, bottom: 10.0),
-                  padding: EdgeInsets.only(left: 5.0, top: 10.0, right: 5.0, bottom: 10.0),
+                  margin: EdgeInsets.only(
+                      left: 5.0, top: 10.0, right: 5.0, bottom: 10.0),
+                  padding: EdgeInsets.only(
+                      left: 5.0, top: 10.0, right: 5.0, bottom: 10.0),
                   color: Colors.teal,
                   child: ListView(
                     children: <Widget>[
@@ -117,13 +118,13 @@ class _MyHomePageState extends State<MyHomePage> {
                                         'Phone: +380672548529       '
                                         'Email: nadiia.skyba@gmail.com'),
                                   ],
-                                )
-                            ),
+                                )),
                           ),
                         ],
                       ),
                       Container(
-                        margin: EdgeInsets.only(left: 5.0, top: 10.0, right: 5.0, bottom: 10.0),
+                        margin: EdgeInsets.only(
+                            left: 5.0, top: 10.0, right: 5.0, bottom: 10.0),
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
@@ -131,7 +132,8 @@ class _MyHomePageState extends State<MyHomePage> {
                               flex: 2,
                               child: Column(
                                 children: [
-                                  Text("DressForDay - it's the easy way to be different. "
+                                  Text(
+                                      "DressForDay - it's the easy way to be different. "
                                       "We are the first rental service for evening and cocktail dresses in Kyiv. "
                                       "Our main advantage is the best prices for the rental of branded dresses in Kyiv !!!"),
                                 ],
@@ -140,28 +142,31 @@ class _MyHomePageState extends State<MyHomePage> {
                           ],
                         ),
                       ),
-
                     ],
                   ),
                 ),
               ),
               back: Container(
-                margin: EdgeInsets.only(left: 10.0, top: 45.0, right: 10.0, bottom: 20.0),
+                margin: EdgeInsets.only(
+                    left: 10.0, top: 45.0, right: 10.0, bottom: 20.0),
                 height: 205,
                 width: 400,
                 decoration: BoxDecoration(
                     //color: Colors.white.withOpacity(0.9),
                     color: Colors.teal,
                     borderRadius: BorderRadius.circular(16),
-                    boxShadow: [BoxShadow(
-                      color: Colors.pink.withOpacity(0.6),
-                      blurRadius: 6,
-                      offset: Offset(1, 1),
-                    )]
-                ),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.pink.withOpacity(0.6),
+                        blurRadius: 6,
+                        offset: Offset(1, 1),
+                      )
+                    ]),
                 child: Container(
-                  margin: EdgeInsets.only(left: 5.0, top: 10.0, right: 5.0, bottom: 10.0),
-                  padding: EdgeInsets.only(left: 5.0, top: 10.0, right: 5.0, bottom: 10.0),
+                  margin: EdgeInsets.only(
+                      left: 5.0, top: 10.0, right: 5.0, bottom: 10.0),
+                  padding: EdgeInsets.only(
+                      left: 5.0, top: 10.0, right: 5.0, bottom: 10.0),
                   color: Colors.teal,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -173,7 +178,8 @@ class _MyHomePageState extends State<MyHomePage> {
                             child: photoQRcode(),
                           ),
                           onTap: () {
-                            Navigator.push(context, MaterialPageRoute(builder: (_) {
+                            Navigator.push(context,
+                                MaterialPageRoute(builder: (_) {
                               return QRcodeSection();
                             }));
                           },
@@ -203,9 +209,9 @@ class _MyHomePageState extends State<MyHomePage> {
         onPressed: _incrementCounter,
         tooltip: 'Increment',
         child: Icon(Icons.add),
-
       ),
-      drawer: ProfileDrawer(),// This trailing comma makes auto-formatting nicer for build methods.
+      drawer:
+          ProfileDrawer(), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 
@@ -213,21 +219,34 @@ class _MyHomePageState extends State<MyHomePage> {
     Navigator.of(context).push(
       MaterialPageRoute<void>(
         builder: (BuildContext context) {
-              return ListTile(
-                onTap: () {
-                  Navigator.pushNamed(context, '/scanner');
-                },
-              );
+          return Scaffold(
+            body: ListTile(
+              onTap: () {
+                Navigator.pushNamed(context, '/scanner');
+              },
+            ),
+          );
         },
       ),
     );
   }
 }
+//   void _scanQR() {
+//     Navigator.of(context).push(
+//       MaterialPageRoute<void>(
+//         builder: (BuildContext context) {
+//               return ListTile(
+//                 onTap: () {
+//                   Navigator.pushNamed(context, '/scanner');
+//                 },
+//               );
+//         },
+//       ),
+//     );
+//   }
+// }
 
-
-
-Widget profilePhoto() =>
-    Stack(
+Widget profilePhoto() => Stack(
       alignment: AlignmentDirectional.topStart,
       children: [
         CircleAvatar(
@@ -237,34 +256,31 @@ Widget profilePhoto() =>
       ],
     );
 
-Widget photoQRcode() =>
-    Image(
+Widget photoQRcode() => Image(
       image: AssetImage('image/QRcode.png'),
       height: 150,
       width: 150,
     );
 
-
 class QRcodeSection extends StatelessWidget {
   final String image = 'image/QRcode.png';
-
 
   @override
   Widget build(BuildContext context) {
     return Container(
       //child: Expanded(
-        child: GestureDetector(
-          child: Hero(
-            tag: 'imageHero',
-            child: Image.asset(
-              image,
-            ),
+      child: GestureDetector(
+        child: Hero(
+          tag: 'imageHero',
+          child: Image.asset(
+            image,
           ),
-          onTap: () {
-            Navigator.pop(context);
-          },
         ),
-    //),
+        onTap: () {
+          Navigator.pop(context);
+        },
+      ),
+      //),
     );
   }
 }

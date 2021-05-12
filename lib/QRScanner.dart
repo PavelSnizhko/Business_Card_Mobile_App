@@ -7,7 +7,7 @@ import 'package:qr_code_scanner/qr_code_scanner.dart';
 // import 'package:BUSSINES_CARD_MOBILE_APP/qr_code_scanner.dart';
 // import 'package:business_card_project/qr_code_scanner.dart';
 
-void main() => runApp(MaterialApp(home: QRViewExample()));
+// void main() => runApp(MaterialApp(home: QRViewExample()));
 
 // void main() => runApp(MaterialApp(home: QRViewExample()));
 
