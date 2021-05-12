@@ -1,8 +1,10 @@
 import 'package:business_card_project/profileDrawer.dart';
+import 'package:business_card_project/utils/database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flip_card/flip_card.dart';
+import 'package:business_card_project/models/card.dart';
 
 
 
@@ -26,6 +28,27 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  Map<String, String> newcard = {};
+  Future _cardFuture;
+
+  @override
+  void initState() {
+    super.initState();
+    _cardFuture = getCard();
+  }
+
+  getCard() async {
+    final _cardData = await DBProvider.db.cards();
+    return _cardData;
+  }
+
+  // var cardDB = Card(1, '', 'image/dress_for_day.jpg', 'Natalya', 'Skyba',
+  //         'HandMade', 'nataly.skyba@gmail.com', 'My company is perfect. '
+  //             'We are the first rental service for evening and cocktail '
+  //             'dresses in Kyiv. Our main advantage is the best prices for '
+  //             'the rental of branded dresses in Kyiv !!! ');
+
+
   //DBProvider.db.ca
 
   @override
@@ -37,6 +60,9 @@ class _MyHomePageState extends State<MyHomePage> {
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
+        actions: [
+          IconButton(icon: Icon(Icons.linked_camera), onPressed: _scanQR),
+        ],
       ),
       body: Container(
         //future: DBProvider.db.cards(),
@@ -180,6 +206,20 @@ class _MyHomePageState extends State<MyHomePage> {
 
       ),
       drawer: ProfileDrawer(),// This trailing comma makes auto-formatting nicer for build methods.
+    );
+  }
+
+  void _scanQR() {
+    Navigator.of(context).push(
+      MaterialPageRoute<void>(
+        builder: (BuildContext context) {
+              return ListTile(
+                onTap: () {
+                  Navigator.pushNamed(context, '/scanner');
+                },
+              );
+        },
+      ),
     );
   }
 }

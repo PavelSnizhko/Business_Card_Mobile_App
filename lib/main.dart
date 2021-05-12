@@ -6,6 +6,8 @@ import 'package:business_card_project/home.dart';
 
 import 'package:flutter/widgets.dart';
 
+import 'QRScanner.dart';
+
 
 void main() {
   // Avoid errors caused by flutter upgrade.
@@ -33,6 +35,7 @@ class MyApp extends StatelessWidget {
         '/': (context) => MyHomePage(title: 'Business Card'),
         '/newcard': (context) => AddCard(),
         '/settings': (context) => Settings(),
+        '/scanner': (context) => QRViewExample(),
       },
     );
   }
